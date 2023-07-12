@@ -1,6 +1,6 @@
-package com.jpegsinng.todocompose.data.repository
+package com.jpegsinng.todocompose.data.repositories
 
-import com.jpegsinng.todocompose.data.models.ToDoDao
+import com.jpegsinng.todocompose.data.ToDoDao
 import com.jpegsinng.todocompose.data.models.ToDoTask
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow

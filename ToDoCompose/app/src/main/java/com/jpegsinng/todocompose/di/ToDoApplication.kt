@@ -1,4 +1,4 @@
-package com.jpegsinng.todocompose
+package com.jpegsinng.todocompose.di
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

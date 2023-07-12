@@ -3,7 +3,7 @@ package com.jpegsinng.todocompose.ui.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jpegsinng.todocompose.data.models.ToDoTask
-import com.jpegsinng.todocompose.data.repository.ToDoRepository
+import com.jpegsinng.todocompose.data.repositories.ToDoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

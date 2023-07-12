@@ -2,7 +2,7 @@ package com.jpegsinng.todocompose.di
 
 import android.content.Context
 import androidx.room.Room
-import com.jpegsinng.todocompose.data.models.ToDoDatabase
+import com.jpegsinng.todocompose.data.ToDoDatabase
 import com.jpegsinng.todocompose.util.Constants.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
@@ -27,6 +27,7 @@ object DatabaseModule {
     ).build()
 
     @Singleton
+    @Provides
     fun provideDao(database: ToDoDatabase) = database.toDoDao()
 
 }
