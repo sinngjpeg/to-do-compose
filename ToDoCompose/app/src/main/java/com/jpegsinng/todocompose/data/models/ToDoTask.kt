@@ -2,7 +2,7 @@ package com.jpegsinng.todocompose.data.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.jpegsinng.todocompose.data.models.util.Constants.DATABASE_TABLE
+import com.jpegsinng.todocompose.util.Constants.DATABASE_TABLE
 
 @Entity(tableName = DATABASE_TABLE)
 data class ToDoTask(

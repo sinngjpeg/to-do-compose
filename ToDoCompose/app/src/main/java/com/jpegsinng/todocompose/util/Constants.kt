@@ -1,4 +1,4 @@
-package com.jpegsinng.todocompose.data.models.util
+package com.jpegsinng.todocompose.util
 
 object Constants {
     const val DATABASE_TABLE = "todo_table"
