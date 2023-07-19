@@ -1,6 +1,9 @@
 package com.jpegsinng.todocompose.ui.screens.list
 
 import android.content.res.Configuration
+import android.content.res.Resources
+import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.DropdownMenu
@@ -9,6 +12,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MenuDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -24,13 +28,16 @@ import com.jpegsinng.todocompose.R
 import com.jpegsinng.todocompose.data.models.Priority
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.colorResource
 import com.jpegsinng.todocompose.components.PriorityItem
+import com.jpegsinng.todocompose.ui.theme.LARGE_PADDING
 
 @Composable
 fun ListAppBar() {
     DefaultListAppBar(
         onSearchClicked = {},
-        onSortClicked = {}
+        onSortClicked = {},
+        onDeleteClicked = {}
     )
 }
 
@@ -38,7 +45,8 @@ fun ListAppBar() {
 @Composable
 fun DefaultListAppBar(
     onSearchClicked: () -> Unit,
-    onSortClicked: (Priority) -> Unit
+    onSortClicked: (Priority) -> Unit,
+    onDeleteClicked: () -> Unit
 ) {
     TopAppBar(
         modifier = Modifier,
@@ -48,7 +56,8 @@ fun DefaultListAppBar(
         actions = {
             ListAppBarActions(
                 onSearchClicked = onSearchClicked,
-                onSortClicked = onSortClicked
+                onSortClicked = onSortClicked,
+                onDeleteClicked = onDeleteClicked
             )
         },
         colors = TopAppBarDefaults.smallTopAppBarColors(
@@ -66,10 +75,12 @@ fun DefaultListAppBarActions() {
 @Composable
 fun ListAppBarActions(
     onSearchClicked: () -> Unit,
-    onSortClicked: (Priority) -> Unit
+    onSortClicked: (Priority) -> Unit,
+    onDeleteClicked: () -> Unit
 ) {
     SearchAction(onSearchClicked = onSearchClicked)
     SortAction(onSortClicked = onSortClicked)
+    DeleteAllAction(onDeleteCLicked = onDeleteClicked)
 }
 
 @Composable
@@ -127,6 +138,42 @@ fun SortAction(
     }
 }
 
+@Composable
+fun DeleteAllAction(
+    onDeleteCLicked: () -> Unit
+) {
+    var expanded by remember { mutableStateOf(false) }
+
+    IconButton(onClick = { expanded = true }) {
+        Icon(
+            painter = painterResource(id = R.drawable.ic_more_vert),
+            contentDescription = stringResource(R.string.delete_all_action),
+            tint = Color.White
+        )
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false }
+        ) {
+            DropdownMenuItem(
+                modifier = Modifier
+                    .padding(start = LARGE_PADDING),
+                colors = MenuDefaults.itemColors(Color.Black),
+                text = {
+                    stringResource(
+                        id = R.string.delete_all_action
+                    )
+                    colorResource(id = R.color.black
+                    )
+                },
+                onClick = {
+                    expanded = false
+                    onDeleteCLicked()
+                }
+            )
+        }
+    }
+}
+
 @Preview(name = "Light Mode")
 @Preview(
     uiMode = Configuration.UI_MODE_NIGHT_YES,
@@ -139,6 +186,7 @@ fun SortAction(
 private fun DefaultListAppBarPreview() {
     DefaultListAppBar(
         onSearchClicked = {},
-        onSortClicked = {}
+        onSortClicked = {},
+        onDeleteClicked = {}
     )
 }
